@@ -3,6 +3,9 @@ name: Build release
 on:
   release:
     types: [created]
+    
+env:
+  VSIX: arcad-ibmi-servers-${{ github.ref_name }}.vsix
 
 jobs:
   build:
@@ -33,8 +36,8 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         tag: ${{ github.ref_name }}
-        asset_name: arcad-ibmi-servers-${{ github.ref_name }}.vsix
-        file: arcad-ibmi-servers-${{ github.ref_name }}.vsix        
+        asset_name: $VSIX
+        file: $VSIX
 
     - name: Commit changes and move release tag
       run: |
